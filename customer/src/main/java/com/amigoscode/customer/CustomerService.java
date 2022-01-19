@@ -30,7 +30,7 @@ public class CustomerService {
         customerRepo.saveAndFlush(customer);
 
         var fraudCheckResponse = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}", FraudCheckResponse.class, customer.getId());
+                "http://FRAUD/api/v1/fraud-check/{customerId}", FraudCheckResponse.class, customer.getId());
 
         if(fraudCheckResponse.getIsFraudster()){
             log.error("error thrown");
