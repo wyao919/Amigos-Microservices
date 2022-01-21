@@ -1,11 +1,9 @@
 package com.amigoscode.customer;
 
-import com.amigoscode.clients.fraud.FraudCheckResponse;
 import com.amigoscode.clients.fraud.FraudClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 
@@ -16,10 +14,11 @@ import javax.transaction.Transactional;
 public class CustomerService {
 
     private final CustomerRepo customerRepo;
-    private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
 
+    @Transactional
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
+
 
         var customer = Customer.builder()
                 .firstName(customerRegistrationRequest.getFirstName())
@@ -32,7 +31,9 @@ public class CustomerService {
 
         customerRepo.saveAndFlush(customer);
 
-        FraudCheckResponse fraudster = fraudClient.isFraudster(customer.getId());
+        log.info("saved customer");
+        var fraudster = fraudClient.isFraudster(customer.getId(), customerRegistrationRequest.getEmail());
+
 
         if(fraudster.getIsFraudster()){
             log.error("err  or thrown");

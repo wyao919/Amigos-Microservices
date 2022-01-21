@@ -21,9 +21,4 @@ public record CustomerController (CustomerService customerService){
         customerService.registerCustomer(customerRegistrationRequest);
     }
 
-    @GetMapping("/test")
-    public void test(){
-        System.out.println("test");
-    }
-
 }

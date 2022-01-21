@@ -1,16 +1,18 @@
-package com.amigoscode.fraud;
+package com.amigos.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@EnableFeignClients
 @EnableEurekaClient
-@EnableFeignClients(basePackages = "com.amigoscode.clients")
-public class FraudApplication {
+@EnableTransactionManagement
+public class NotificationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FraudApplication.class, args);
+        SpringApplication.run(NotificationApplication.class, args);
     }
 }
