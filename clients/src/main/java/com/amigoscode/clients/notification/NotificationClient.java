@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface NotificationClient {
 
     @PostMapping("/{customerId}/{email}")
-    Notification sendAndSaveNotification(@PathVariable("customerId") Integer customerId, @PathVariable("email") String email);
+    NotificationRequest sendAndSaveNotification(@PathVariable("customerId") Integer customerId, @PathVariable("email") String email);
 
 }

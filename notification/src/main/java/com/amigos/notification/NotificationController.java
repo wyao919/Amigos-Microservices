@@ -17,9 +17,6 @@ public class NotificationController {
 
     @PostMapping("/{customerId}/{email}")
     public void sendNotification(@PathVariable("customerId") Integer customerId, @PathVariable("email") String email){
-
-      log.info("INSIDE NOTIFICATION CONTROLLER");
-        notificationService.sendAndSaveNotification(customerId, email);
-
+        // TODO document why this method is empty
     }
 }

@@ -6,7 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "com.amigoscode.customer",
+        "com.amigoscode.ampq",
+})
 @EnableTransactionManagement
 @EnableEurekaClient
 @EnableFeignClients(basePackages = "com.amigoscode.clients")

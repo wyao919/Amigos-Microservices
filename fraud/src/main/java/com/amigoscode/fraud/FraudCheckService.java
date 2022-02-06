@@ -14,7 +14,6 @@ import javax.transaction.Transactional;
 public class FraudCheckService {
 
     private final FraudCheckHistoryRepo fraudCheckHistoryRepo;
-    private final NotificationClient notificationClient;
 
     public boolean isFraudulentCustomer(Integer customerId, String email){
 
@@ -29,8 +28,6 @@ public class FraudCheckService {
 
 
         System.out.println(email);
-        notificationClient.sendAndSaveNotification(customerId, email);
-        log.info("Notification sent");
 
         return false;
     }

@@ -1,5 +1,6 @@
 package com.amigos.notification;
 
+import com.amigoscode.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,18 +15,18 @@ public class NotificationService {
 
     private final NotificationRepo notificationRepo;
 
-    public void sendAndSaveNotification(Integer customerId, String customerEmail){
+    public void sendAndSaveNotification(NotificationRequest notificationRequest){
 
         Notification notification = Notification.builder()
                 .isNotified(true)
-                .customerId(customerId)
-                .sender("amigos code")
-                .customerEmail(customerEmail)
-                .message("Welcome to amigos")
+                .customerId(notificationRequest.getId())
+                .sender(notificationRequest.getSender())
+                .customerEmail(notificationRequest.getCustomerEmail())
+                .message(notificationRequest.getMessage())
                 .build();
 
         notificationRepo.save(notification);
-        log.info("Notification Saved for customer {}", customerId);
+        log.info("Notification Saved for customer {}", notification.getCustomerId());
     }
 
 }

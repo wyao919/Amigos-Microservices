@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Notification {
+public class NotificationRequest {
 
     private int id;
     private Boolean isNotified;

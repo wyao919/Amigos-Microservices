@@ -1,6 +1,8 @@
 package com.amigoscode.customer;
 
+import com.amigoscode.ampq.RabbitMQMessageProducer;
 import com.amigoscode.clients.fraud.FraudClient;
+import com.amigoscode.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,10 @@ public class CustomerService {
 
     private final CustomerRepo customerRepo;
     private final FraudClient fraudClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     @Transactional
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
-
 
         var customer = Customer.builder()
                 .firstName(customerRegistrationRequest.getFirstName())
@@ -40,7 +42,18 @@ public class CustomerService {
             throw new IllegalStateException("fraudster");
         }
 
-        // TODO: 1/18/2022 send notification 
-        log.info("user saved");
+        NotificationRequest notificationRequest = new NotificationRequest();
+        notificationRequest.setId(customer.getId());
+        notificationRequest.setCustomerEmail(customer.getEmail());
+        notificationRequest.setMessage("Hello Welcome to amigos code");
+        notificationRequest.setSender("sender is me");
+
+
+        //use this instead of using notificationService, There will be a listerner on the other side
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
     }
 }
