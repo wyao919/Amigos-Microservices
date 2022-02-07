@@ -1,0 +1,8 @@
+com\amigos\notification\Notification.class
+com\amigos\notification\NotificationApplication.class
+com\amigos\notification\NotificationService.class
+com\amigos\notification\NotificationController.class
+com\amigos\notification\rabbitmq\NotificationConsumer.class
+com\amigos\notification\Notification$NotificationBuilder.class
+com\amigos\notification\NotificationRabbitConfig.class
+com\amigos\notification\NotificationRepo.class

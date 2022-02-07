@@ -1,0 +1,3 @@
+com\amigoscode\ampq\RabbitMQApp.class
+com\amigoscode\ampq\RabbitMQMessageProducer.class
+com\amigoscode\ampq\RabbitMQConfig.class

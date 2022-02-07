@@ -11,13 +11,14 @@ import javax.transaction.Transactional;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 @Transactional
+@AllArgsConstructor
 public class CustomerService {
 
     private final CustomerRepo customerRepo;
     private final FraudClient fraudClient;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
+
 
     @Transactional
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -27,9 +28,6 @@ public class CustomerService {
                 .lastName(customerRegistrationRequest.getLastName())
                 .email(customerRegistrationRequest.getEmail())
                 .build();
-
-        // TODO: 1/18/2022 check if email is valid
-        // TODO: 1/18/2022 check if email is not taken
 
         customerRepo.saveAndFlush(customer);
 
